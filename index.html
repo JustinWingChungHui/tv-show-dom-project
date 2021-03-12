@@ -9,13 +9,40 @@
   </head>
 
   <body>
-    <div id="root">
+
+    <!--Shows view-->
+    <div id="showsPage">
+      <select id="showsSelect"></select>
+
+      <input id="showSearch" type="text"/>
+
+      <ul id="shows">        
+      </ul>
     </div>
 
+    <!--Episodes View-->
+    <div id="episodesPage" class="hidden">
+      <button id="backButton">Back</button>
+      
+      <select id="episodesSelect"></select>
+       
+      <input id="episodeSearch" type="text"/>
+
+      <ul id="episodes">        
+      </ul>
+    </div>
+
+
+
+
     <!-- Loads a provided function called getAllEpisodes() which returns all episodes -->
-    <script src="episodes.js"></script>
+    <script src="shows.js"></script>
 
     <!-- Loads YOUR javascript code -->
     <script src="script.js"></script>
+
+    <script src="showsHandler.js"></script>
+    <script src="episodesHandler.js"></script>
+
   </body>
 </html>

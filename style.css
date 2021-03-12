@@ -1,3 +1,36 @@
-#root {
-  color: red;
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.hidden {
+  display: none;
+}
+
+ul {
+  list-style-type: none;
+}
+
+#shows li {
+  max-width: 20em;
+  min-height: 50em;
+  float: left;
+  margin: 0.5em;
+  background-color: lightpink;
+  padding: 1em;
+  cursor: pointer;
+  border-radius: 1em;
+}
+
+#episodes li {
+  max-width: 20em;
+  min-height: 50em;
+  float: left;
+  margin: 1em;
+  background-color: lightgreen;
+  padding: 1em;
+  border-radius: 1em;
+}
+
+img {
+  max-width: 18em;
 }
