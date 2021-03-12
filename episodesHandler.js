@@ -9,10 +9,10 @@ let EpisodesHandler = {
             .addEventListener('click', ShowsHandler.ShowPage);
 
         document.getElementById('episodesSelect')
-            .addEventListener('change', e => EpisodesHandler.OnEpisodeSelect(e.target.value));
+            .addEventListener('change', this.OnEpisodeSelect);
 
         document.getElementById('episodeSearch')
-            .addEventListener('input', EpisodesHandler.OnEpisodeSearch);
+            .addEventListener('input', this.OnEpisodeSearch);
     },
 
 
@@ -32,9 +32,9 @@ let EpisodesHandler = {
         fetch(`https://api.tvmaze.com/shows/${showId}/episodes`)
             .then((response) => response.json())
             .then((data) => {
-                EpisodesHandler.data = data;
-                EpisodesHandler.DrawSelectBox();
-                EpisodesHandler.DrawEpisodes();
+                this.data = data;
+                this.DrawSelectBox();
+                this.DrawEpisodes();
             });
 
     },
@@ -48,9 +48,9 @@ let EpisodesHandler = {
         selectBox.innerHTML = '';
 
         let optionsHtml = '<option value="">All Episodes</option>';
-        EpisodesHandler.data.forEach(episode => {
+        this.data.forEach(episode => {
             optionsHtml += 
-                `<option value="${episode.id}">${EpisodesHandler.GetSeasonCode(episode)} ${episode.name}</option>\n`;
+                `<option value="${episode.id}">${this.GetSeasonCode(episode)} ${episode.name}</option>\n`;
         });
 
         selectBox.innerHTML = optionsHtml;        
@@ -64,7 +64,7 @@ let EpisodesHandler = {
         container.innerHTML = '';
         let contentsHtml = '';
 
-        EpisodesHandler.data.forEach(episode => {
+        this.data.forEach(episode => {
 
             // if it doesn't have an image, show no image picture
             let image = episode.image ? 
@@ -73,7 +73,7 @@ let EpisodesHandler = {
 
             contentsHtml += 
                 `<li id="${episode.id}">
-                    <h3>${EpisodesHandler.GetSeasonCode(episode)} ${episode.name}</h3>
+                    <h3>${this.GetSeasonCode(episode)} ${episode.name}</h3>
                     <img src="${image}"/>
                     <p>${episode.summary ? episode.summary : ''}</p>
                 </li>`;
@@ -84,7 +84,9 @@ let EpisodesHandler = {
 
 
     // Handles the select box changed event
-    OnEpisodeSelect: function(episodeId) {
+    OnEpisodeSelect: function(evt) {
+
+        let episodeId = evt.target.value;
         let container = document.getElementById('episodes');
         
         for(let li of container.childNodes) {
@@ -123,7 +125,7 @@ let EpisodesHandler = {
         } else {
 
             // search box has nothing in it so show all episodes
-            EpisodesHandler.data.forEach(
+            this.data.forEach(
                 episode => document.getElementById(episode.id).classList.remove('hidden'));    
         }
     },

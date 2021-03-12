@@ -5,16 +5,16 @@ let ShowsHandler = {
 
     // Setup code for shows
     Setup: function() {
-        ShowsHandler.data = getAllShows()
-                                .sort(ShowsHandler.SortShows);
+        this.data = getAllShows()
+                                .sort(this.SortShows);
 
         document.getElementById('showsSelect')
-            .addEventListener("change", e => ShowsHandler.OnShowSelect(e.target.value));
+            .addEventListener("change", e => this.OnShowSelect(e.target.value));
 
         document.getElementById('showSearch')
-            .addEventListener("input", e => ShowsHandler.SearchShows());     
+            .addEventListener("input", e => this.SearchShows());     
             
-        ShowsHandler.ShowPage();
+            this.ShowPage();
     },
 
     // Shows Shows page and hides episode page
@@ -24,8 +24,8 @@ let ShowsHandler = {
         document.getElementById('episodesPage').classList.add('hidden');
         document.getElementById('showSearch').value = '';
 
-        ShowsHandler.DrawSelectBox();
-        ShowsHandler.DrawShows();
+        this.DrawSelectBox();
+        this.DrawShows();
     },
 
     // Draws the select box and populates the options
@@ -51,7 +51,7 @@ let ShowsHandler = {
 
         container.innerHTML = '';
 
-        ShowsHandler.data.forEach(show => {
+        this.data.forEach(show => {
 
             // if it doesn't have an image, show no image picture
             let image = show.image ? 
@@ -64,11 +64,11 @@ let ShowsHandler = {
                             <img src="${image}"/>
                             <p>${show.summary}</p>`;
 
-            li.addEventListener('click', () => ShowsHandler.OnShowSelect(li.value));
+            li.addEventListener('click', () => this.OnShowSelect(li.value));
 
             container.appendChild(li);
         });
-        
+
     },
 
     // Function to sort the shows by name
@@ -82,16 +82,16 @@ let ShowsHandler = {
         let value = document.getElementById('showSearch').value;
 
         if (value) {
-            ShowsHandler.data = getAllShows()
-                                    .filter(s => ShowsHandler.FilterShows(s, value))
-                                    .sort(ShowsHandler.SortShows);   
+            this.data = getAllShows()
+                                    .filter(s => this.FilterShows(s, value))
+                                    .sort(this.SortShows);   
 
         } else {
-            ShowsHandler.data = getAllShows()
-                                    .sort(ShowsHandler.SortShows);      
+            this.data = getAllShows()
+                                    .sort(this.SortShows);      
         }
 
-        ShowsHandler.DrawShows();
+        this.DrawShows();
     },
 
 
