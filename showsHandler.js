@@ -4,15 +4,12 @@ let ShowsHandler = {
     data: [],
 
     // Setup code for shows
-    Setup: function() {
-        this.data = getAllShows()
-                                .sort(this.SortShows);
-
+    Setup: function() {        
         document.getElementById('showsSelect')
             .addEventListener("change", e => this.OnShowSelect(e.target.value));
 
         document.getElementById('showSearch')
-            .addEventListener("input", e => this.SearchShows());     
+            .addEventListener("input", () => this.SearchShows());     
             
             this.ShowPage();
     },
@@ -24,6 +21,8 @@ let ShowsHandler = {
         document.getElementById('episodesPage').classList.add('hidden');
         document.getElementById('showSearch').value = '';
 
+        this.data = getAllShows().sort(this.SortShows);
+        
         this.DrawSelectBox();
         this.DrawShows();
     },

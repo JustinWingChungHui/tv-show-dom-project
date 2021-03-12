@@ -6,13 +6,13 @@ let EpisodesHandler = {
     // Setup all the events
     Setup: function() {
         document.getElementById('backButton')
-            .addEventListener('click', ShowsHandler.ShowPage);
+            .addEventListener('click', () => ShowsHandler.ShowPage());
 
         document.getElementById('episodesSelect')
-            .addEventListener('change', this.OnEpisodeSelect);
+            .addEventListener('change', (e) => this.OnEpisodeSelect(e));
 
         document.getElementById('episodeSearch')
-            .addEventListener('input', this.OnEpisodeSearch);
+            .addEventListener('input', () => this.OnEpisodeSearch());
     },
 
 
@@ -108,7 +108,7 @@ let EpisodesHandler = {
             // Hide episodes that don't match search criteria
             let searchtxt = value.toLowerCase();
 
-            for (let episode of EpisodesHandler.data) {
+            for (let episode of this.data) {
 
                 // Need case insensitive comparison
                 let title = episode.title ? episode.title.toLowerCase() : '';
